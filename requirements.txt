@@ -1,0 +1,14 @@
+# Core dependencies
+torch>=2.0.0
+numpy>=1.19.0
+matplotlib>=3.3.0
+hmmlearn>=0.2.7
+
+# Optional dependencies (uncomment if needed)
+# wandb>=0.12.0  # for experiment tracking
+# tiktoken>=0.3.0  # if using GPT tokenizer
+
+# Development dependencies (optional)
+# pytest>=6.0.0
+# black>=22.0.0
+# flake8>=4.0.0
