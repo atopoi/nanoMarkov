@@ -42,56 +42,50 @@ pip install torch numpy matplotlib hmmlearn
 pip install wandb
 ```
 
-### Generate MM Data
+### Training
 
+For complete manual training guide, Makefile usage, and more examples, see [TRAINING_G UIDE.md](TRAINING_GUIDE.md).
+
+**Note:** The training script automatically selects the best device (CUDA, MPS on Mac, or CPU) and dtype. Configs use `device='auto'` and `compile='auto'` for optimal performance on your hardware.
+
+### Quick Examples
+
+#### Example 1: Train MM with 10 states (small model)
 ```bash
-# Generate MM-100 (100 states)
-make mm100-data
+# Step 1: Generate data
+python scripts/mm_generate.py 10 --train 10000 --val 1000
 
-# Generate MM-10 (small, for testing)
-make mm10-data
-
-# Generate sparse MM (75% zero transitions)
-make mm100-sparse-75-data
+# Step 2: Train (default seed 42)
+./train_mm.sh 10
 ```
 
-### Train a Model
-
+#### Example 2: Train sparse MM-100 with 75% sparsity
 ```bash
-# Train on MM-100
-make mm100-train
+# Step 1: Generate sparse data
+python scripts/mm_generate.py 100 --train 50000 --val 5000 --sparsity 75
 
-# Train minimal architecture (fast)
-make mm100-train TRAIN=train_mm.py
-
-# Train with different seed
-make mm100-train-123
-
-# Train with WandB logging enabled
-make mm100-train WANDB=True
+# Step 2: Train with seed 123
+./train_mm.sh 100 123 --sparse 75
 ```
 
-### Experiment Tracking with WandB
 
-WandB (Weights & Biases) integration is **disabled by default** to keep the library minimal. To enable:
+### Tracking with WandB
+
+To enable WandB (Weights & Biases) integration in the configs:
 
 ```python
-# In your config file or command line
+# In your config file
 wandb_log = True
-wandb_project = 'nanomarkov'
-wandb_run_name = 'mm100-experiment'
 ```
 
 Or via command line:
 ```bash
-python train_mm.py config/mm100.py --wandb_log=True
+python train_mm.py config.py --wandb_log=True
+# or
+./train_mm.sh 100 --wandb_log=True
 ```
 
 ### Evaluate
-
-```bash
-# Run comprehensive evaluation
-make mm100-eval
 
 # Evaluate specific checkpoint
 python scripts/mm_eval.py --ckpt_path trainings/MM/MM-100/MM-100-42/ckpt.pt
