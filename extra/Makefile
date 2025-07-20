@@ -1,3 +1,17 @@
+##############################################################################
+# DEPRECATION NOTICE: This Makefile is deprecated.
+# 
+# Please use the train_mm.sh script instead for training models.
+# See TRAINING_GUIDE.md for the recommended workflow.
+#
+# This Makefile has known issues:
+# - Does not handle wandb_log configuration (defaults to True in configs)
+# - Uses hardcoded seeds in some targets
+# - Complex dependency management
+#
+# Contributions to fix this Makefile are welcome!
+##############################################################################
+
 # MM Framework Makefile - Reorganized Structure
 # Run from project root directory
 
@@ -5,8 +19,7 @@ SCALES = 10 100 1000
 SPARSE_SCALES = 100-sparse-75 1000-sparse-75
 ALL_MM_SCALES = $(SCALES) $(SPARSE_SCALES)
 MM_EXTRA_BASES = 100 100-sparse-75
-SEEDS = 42
-#SEEDS = 42 123 999
+SEEDS = 42 123 999
 EXTRA_VARIANTS = c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12
 
 # Top-level targets
@@ -211,6 +224,26 @@ trainings/MM/MM-100-sparse-75/eval_summary.txt: trainings/MM/MM-100-sparse-75/MM
 	@echo "📈 Generating evaluation summary for MM-100-sparse-75"
 	@python scripts/mm_eval.py 100-sparse-75 --seeds $(SEEDS) --summary > $@
 	@echo "✅ Evaluation summary completed for MM-100-sparse-75"
+
+# Convenience targets for data generation (as shown in README)
+MM-10-data: data/mm10/train.bin
+MM-100-data: data/mm100/train.bin
+MM-1000-data: data/mm1000/train.bin
+MM-100-sparse-75-data: data/mm100-sparse-75/train.bin
+MM-1000-sparse-75-data: data/mm1000-sparse-75/train.bin
+
+# Convenience targets for training (as shown in README)
+MM-10-train: MM-10
+MM-100-train: MM-100
+MM-1000-train: MM-1000
+MM-100-sparse-75-train: MM-100-sparse-75
+MM-1000-sparse-75-train: MM-1000-sparse-75
+
+
+# Convenience targets for evaluation (as shown in README)
+MM-10-eval: trainings/MM/MM-10/eval_summary.txt
+MM-100-eval: trainings/MM/MM-100/eval_summary.txt
+MM-1000-eval: trainings/MM/MM-1000/eval_summary.txt
 
 # Data generation with appropriate sizes
 data/mm10/train.bin:
@@ -472,7 +505,7 @@ help:
 	@echo "  make MM-extra-c1                  # Train single MM-extra variant"
 	@echo "  make status                   # Check progress"
 
-.PHONY: all status clean-MM-% clean-all help MM-extra-% eval-MM-extra-% MM-extra-all eval-MM-extra-all metrics45-MM-% metrics45-MM-extra-% metrics45-MM-extra-all MM-100-sparse-75-FULL MM-100-FULL sparse-comprehensive sparse-extra-comprehensive sparse-comparison
+.PHONY: all status clean-MM-% clean-all help MM-extra-% eval-MM-extra-% MM-extra-all eval-MM-extra-all metrics45-MM-% metrics45-MM-extra-% metrics45-MM-extra-all MM-100-sparse-75-FULL MM-100-FULL sparse-comprehensive sparse-extra-comprehensive sparse-comparison MM-10-data MM-100-data MM-1000-data MM-100-sparse-75-data MM-1000-sparse-75-data MM-10-train MM-100-train MM-1000-train MM-100-sparse-75-train MM-1000-sparse-75-train MM-10-eval MM-100-eval MM-1000-eval
 
 # Default target when no arguments provided
 .DEFAULT_GOAL := help

@@ -44,7 +44,7 @@ pip install wandb
 
 ### Training
 
-For complete manual training guide, Makefile usage, and more examples, see [TRAINING_G UIDE.md](TRAINING_GUIDE.md).
+For complete manual training guide and more examples, see [TRAINING_GUIDE.md](TRAINING_GUIDE.md).
 
 **Note:** The training script automatically selects the best device (CUDA, MPS on Mac, or CPU) and dtype. Configs use `device='auto'` and `compile='auto'` for optimal performance on your hardware.
 
@@ -135,7 +135,9 @@ nanoMarkov/
 ├── configs/                          # Configuration generators
 │   ├── mm_config.py
 │   └── mm_config_extra.py
-├── Makefile                          # Convenient commands
+├── train_mm.sh                       # Bash script for training models
+├── extra/                            # Legacy tools and utilities
+│   └── Makefile                      # Legacy build automation (deprecated)
 ├── data/                             # Generated MM datasets
 └── trainings/                        # Training outputs and checkpoints
 ```
