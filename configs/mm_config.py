@@ -77,7 +77,7 @@ min_lr = 1e-4
 device = 'auto'
 dtype = 'auto'
 compile = False
-wandb_log = True
+wandb_log = False
 wandb_project = 'MM-experiments'
 wandb_run_name = 'MM-{mm_id}-{seed}'
 
