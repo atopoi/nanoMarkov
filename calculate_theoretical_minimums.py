@@ -42,6 +42,7 @@ def calculate_uniform_entropy(n_states):
 
 def main():
     models_to_check = [
+        # Edit this list to process your own trained models
         ('MM-10', 'data/mm10/model.pkl', 10),
         ('MM-100', 'data/mm100/model.pkl', 100),
         ('MM-1000', 'data/mm1000/model.pkl', 1000),

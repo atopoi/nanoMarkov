@@ -2,13 +2,29 @@
 
 A minimal, hackable library for training transformer models on Markov Models (MM). Built for mechanistic interpretability research, based on Andrej Karpathy's [nanoGPT](https://github.com/karpathy/nanoGPT).
 
-## 🎯 Goals
 
-- **Easy to modify**: Just a few files, designed to be read, understood and hacked, by humans and coding agents.
+## 🔬 Research Context
+
+This library is part of a larger mechanistic interpretability project exploring how transformers learn formal structures. While LLMs should naturally learn Markov models (a basic sequence structure prevalent in language), we discovered there were no clear recipes or libraries for training and experimenting with this fundamental capability.
+
+nanoMarkov fills this gap by providing a standalone library that addresses the many pitfalls and subtleties in MM training. Originally designed for our research, it's valuable for anyone interested in:
+
+- Understanding transformer internals 
+- Testing interpretability tools
+- Exploring minimal architectures
+- Studying emergence of capabilities
+
+An accompanying paper with full results and analysis is forthcoming.
+
+## 🎯 Goals and Features
+
+- **Training recipes and templates**: Battle-tested configurations for MM training, with proper data preparation and loading
+- **Comprehensive evaluation**: 6-metric framework for rigorous MM learning assessment, with detailed discussion of metric significance
+- **Easy to modify**: Just a few files, designed to be read, understood and hacked by humans and coding agents
 - **Research-focused**: Built for mechanistic interpretability experiments
 - **Minimal dependencies**: Based on nanoGPT architecture
 - **Throw-away friendly**: Fork it, break it, learn from it!
-- **Rigorous evaluation**: 6-metric framework for comprehensive MM learning assessment
+
 
 ## 🚀 Quick Start
 
@@ -16,7 +32,7 @@ A minimal, hackable library for training transformer models on Markov Models (MM
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/nanoMarkov.git
+git clone https://github.com/atopoi/nanoMarkov.git
 cd nanoMarkov
 
 # Install dependencies
@@ -109,16 +125,6 @@ python scripts/mm_eval.py --ckpt_path trainings/MM/MM-100/MM-100-42/ckpt.pt
 - **MLPs are enough**: MLP-only version can encode the transitions matrices
 - **Perfect Markov compliance**: All architectures learn true Markov property
 
-## 🔬 Research Context
-
-This library is part of a larger mechanistic interpretability project exploring how transformers learn formal structures. While designed for our specific research, it may be useful for:
-
-- Understanding transformer internals 
-- Testing interpretability tools
-- Exploring minimal architectures
-- Studying emergence of capabilities
-
-An accompanying paper with full results and analysis is forthcoming.
 
 ## 📁 Project Structure
 
@@ -188,10 +194,10 @@ This is research code - feel free to:
 
 If you use nanoMarkov in your research, please cite:
 ```bibtex
-@software{nanomarkov2024,
+@software{nanomarkov2025,
   author = {Zolfaghari, Houman},
   title = {nanoMarkov: Minimal Markov Model Training for Transformers},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/atopoi/nanoMarkov}
 }
 ```
