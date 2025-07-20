@@ -87,9 +87,12 @@ python train_mm.py config.py --wandb_log=True
 
 ### Evaluate
 
+```bash
 # Evaluate specific checkpoint
 python scripts/mm_eval.py --ckpt_path trainings/MM/MM-100/MM-100-42/ckpt.pt
 ```
+
+For complete evaluation guide including all 6 metrics, see [EVALUATION_GUIDE.md](EVALUATION_GUIDE.md).
 
 ## 📊 Key Features
 
